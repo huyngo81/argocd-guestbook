@@ -10,10 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: echo "before change variable $(test)"
+  displayName: 'Reading variable test'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo change variable test 
+    echo echo "##vso[task.setvariable variable=test]crushed tomatoes"
+  displayName: 'set variable'
+
+- script: |
+    echo "after change $(test)"
+  displayName: 'after change'
